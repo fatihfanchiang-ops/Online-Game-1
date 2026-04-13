@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTBrown Community - Online Store & Delivery</title>
+    <!-- 引入CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 页面头部 -->
+    <header class="header">
+        <div class="container">
+            <h1><i class="fas fa-store"></i> LTBrown Community Store</h1>
+            <p>Fast Delivery for Our Community</p>
+        </div>
+    </header>
+
+    <!-- 购物车区域 -->
+    <section class="cart-section">
+        <div class="container">
+            <h2>Your Cart <span id="cart-count">0</span></h2>
+            <div id="cart-items" class="cart-items"></div>
+            <p class="total">Total: $<span id="total-price">0.00</span></p>
+            <button id="checkout-btn" class="checkout-btn">Place Order & Request Delivery</button>
+        </div>
+    </section>
+
+    <!-- 商品列表 -->
+    <main class="products">
+        <div class="container">
+            <h2>Community Products</h2>
+            <div class="product-grid" id="product-grid">
+                <!-- 商品由JS动态加载 -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 订单配送状态 -->
+    <section class="order-status" id="order-status" style="display: none;">
+        <div class="container">
+            <h2>Order & Delivery Status</h2>
+            <div id="status-message"></div>
+            <div class="delivery-tracker">
+                <div class="step" id="step1"><i class="fas fa-check"></i> Order Placed</div>
+                <div class="step" id="step2">Preparing</div>
+                <div class="step" id="step3">Out for Delivery</div>
+                <div class="step" id="step4">Delivered</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 引入JS -->
+    <script src="script.js"></script>
+</body>
+</html>
