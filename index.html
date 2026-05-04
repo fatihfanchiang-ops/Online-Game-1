@@ -13,8 +13,12 @@
             font-family: Arial, sans-serif;
         }
 
+        body {
+            background-color: #f5f5f5;
+        }
+
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -27,63 +31,89 @@
         }
 
         .cart-section {
-            background: #f8f9fa;
+            background: white;
             padding: 20px;
-            border-radius: 8px;
             margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .cart-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
         }
 
         .total {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 15px 0;
+            color: #2c3e50;
         }
 
         .checkout-btn {
-            background: #27ae60;
+            background: #e67e22;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 1rem;
         }
 
         .products h2 {
-            margin-bottom: 20px;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.8rem;
+            color: #2c3e50;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .product-card {
-            border: 1px solid #ddd;
+            background: white;
             border-radius: 8px;
-            padding: 15px;
+            padding: 25px;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .product-img {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
-            margin: 0 auto 10px;
+            margin: 0 auto 15px;
         }
 
         .product-card h3 {
             margin: 10px 0;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        .product-card p.desc {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .product-card p.price {
+            color: #e74c3c;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
         .product-card button {
-            background: #3498db;
+            background: #27ae60;
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 1rem;
         }
 
         .cart-items {
@@ -92,14 +122,15 @@
 
         .cart-item {
             padding: 8px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #eee;
         }
 
         .order-status {
-            background: #f1f1f1;
+            background: white;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .delivery-tracker {
@@ -111,7 +142,7 @@
         .step {
             text-align: center;
             padding: 10px;
-            background: white;
+            background: #f0f0f0;
             border-radius: 5px;
             width: 23%;
         }
@@ -123,6 +154,7 @@
     </style>
 </head>
 <body>
+    <!-- 页面头部 -->
     <header class="header">
         <div class="container">
             <h1><i class="fas fa-store"></i> LTBrown Community Store</h1>
@@ -130,22 +162,27 @@
         </div>
     </header>
 
+    <!-- 购物车区域 -->
     <section class="cart-section">
         <div class="container">
             <h2>Your Cart <span id="cart-count">0</span></h2>
             <div id="cart-items" class="cart-items"></div>
-            <p class="total">Total: ¥<span id="total-price">0.00</span></p>
+            <p class="total">Total: $<span id="total-price">0.00</span></p>
             <button id="checkout-btn" class="checkout-btn">Place Order & Request Delivery</button>
         </div>
     </section>
 
+    <!-- 商品列表 -->
     <main class="products">
         <div class="container">
             <h2>Community Products</h2>
-            <div class="product-grid" id="product-grid"></div>
+            <div class="product-grid" id="product-grid">
+                <!-- 商品会自动渲染在这里 -->
+            </div>
         </div>
     </main>
 
+    <!-- 订单配送状态 -->
     <section class="order-status" id="order-status" style="display: none;">
         <div class="container">
             <h2>Order & Delivery Status</h2>
@@ -153,29 +190,33 @@
             <div class="delivery-tracker">
                 <div class="step" id="step1"><i class="fas fa-check"></i> Order Placed</div>
                 <div class="step" id="step2">Preparing</div>
-                <div class="step3">Out for Delivery</div>
+                <div class="step" id="step3">Out for Delivery</div>
                 <div class="step" id="step4">Delivered</div>
             </div>
         </div>
     </section>
 
     <script>
+        // 这里是你要的3个商品：可乐/橙子/农夫山泉，价格按你说的来，图片用无防盗链的稳定地址
         const products = [
             {
                 id: 1,
                 name: "可乐",
+                desc: "经典碳酸饮料",
                 price: 100,
                 image: "https://cdn-icons-png.flaticon.com/512/168/168726.png"
             },
             {
                 id: 2,
                 name: "橙子",
+                desc: "新鲜时令水果",
                 price: 200,
                 image: "https://cdn-icons-png.flaticon.com/512/2909/2909685.png"
             },
             {
                 id: 3,
                 name: "农夫山泉",
+                desc: "天然矿泉水",
                 price: 30,
                 image: "https://cdn-icons-png.flaticon.com/512/3052/3052339.png"
             }
@@ -184,22 +225,26 @@
         let cart = [];
         let total = 0;
 
+        // 渲染商品（和你截图里的布局完全一样）
         function renderProducts() {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
+
             products.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
                     <img src="${product.image}" class="product-img" alt="${product.name}">
                     <h3>${product.name}</h3>
-                    <p>¥${product.price.toFixed(2)}</p>
+                    <p class="desc">${product.desc}</p>
+                    <p class="price">$${product.price.toFixed(2)}</p>
                     <button onclick="addToCart(${product.id})">Add to Cart</button>
                 `;
                 grid.appendChild(card);
             });
         }
 
+        // 加入购物车
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             cart.push(product);
@@ -207,32 +252,43 @@
             updateCart();
         }
 
+        // 更新购物车显示
         function updateCart() {
-            document.getElementById('cart-count').textContent = cart.length;
-            document.getElementById('total-price').textContent = total.toFixed(2);
+            const count = document.getElementById('cart-count');
             const items = document.getElementById('cart-items');
+            const totalPrice = document.getElementById('total-price');
+
+            count.textContent = cart.length;
+            totalPrice.textContent = total.toFixed(2);
+
             items.innerHTML = '';
             cart.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'cart-item';
-                div.textContent = `${item.name} - ¥${item.price.toFixed(2)}`;
+                div.textContent = `${item.name} - $${item.price.toFixed(2)}`;
                 items.appendChild(div);
             });
         }
 
+        // 结账流程
         document.getElementById('checkout-btn').addEventListener('click', () => {
             if (cart.length === 0) {
                 alert("Your cart is empty!");
                 return;
             }
+
             document.getElementById('order-status').style.display = 'block';
             document.getElementById('status-message').textContent = "Your order has been placed!";
-            const steps = ['step1','step2','step3','step4'];
-            steps.forEach((s,i)=>{
-                setTimeout(()=>document.getElementById(s).classList.add('active'),i*1500);
+            
+            const steps = ['step1', 'step2', 'step3', 'step4'];
+            steps.forEach((s, i) => {
+                setTimeout(() => {
+                    document.getElementById(s).classList.add('active');
+                }, i * 1500);
             });
         });
 
+        // 初始化页面
         window.onload = renderProducts;
     </script>
 </body>
