@@ -4,10 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LTBrown Community - Online Store & Delivery</title>
-    <!-- 引入CSS -->
-    <link rel="stylesheet" href="styles.css">
     <!-- 引入Font Awesome图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .cart-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .checkout-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .products h2 {
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin: 0 auto 10px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+        }
+
+        .product-card button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            margin: 10px 0;
+        }
+
+        .cart-item {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-status {
+            background: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .delivery-tracker {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            width: 23%;
+        }
+
+        .step.active {
+            background: #27ae60;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <!-- 页面头部 -->
@@ -23,7 +137,7 @@
         <div class="container">
             <h2>Your Cart <span id="cart-count">0</span></h2>
             <div id="cart-items" class="cart-items"></div>
-            <p class="total">Total: $<span id="total-price">0.00</span></p>
+            <p class="total">Total: ¥<span id="total-price">0.00</span></p>
             <button id="checkout-btn" class="checkout-btn">Place Order & Request Delivery</button>
         </div>
     </section>
@@ -33,7 +147,7 @@
         <div class="container">
             <h2>Community Products</h2>
             <div class="product-grid" id="product-grid">
-                <!-- 商品由JS动态加载 -->
+                <!-- 商品会自动渲染在这里 -->
             </div>
         </div>
     </main>
@@ -52,7 +166,96 @@
         </div>
     </section>
 
-    <!-- 引入JS -->
-    <script src="script.js"></script>
+    <script>
+        // 已按你给的信息配置好
+        const products = [
+            {
+                id: 1,
+                name: "可乐",
+                price: 100,
+                image: "https://tse1.mm.bing.net/th/id/OIP.N_qycw8cGloGXenMk0naJAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3"
+            },
+            {
+                id: 2,
+                name: "橙子",
+                price: 200,
+                image: "https://th.bing.com/th/id/OIP.HCkyRzHTreMO3B0N2eaM6AHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+            },
+            {
+                id: 3,
+                name: "农夫山泉",
+                price: 30,
+                image: "https://tse2.mm.bing.net/th/id/OIP.8ts8i2h0MFPF6NdKAPm-ewHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+            }
+        ];
+
+        let cart = [];
+        let total = 0;
+
+        // 渲染商品
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" class="product-img" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>¥${product.price.toFixed(2)}</p>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 加入购物车
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            total += product.price;
+            updateCart();
+        }
+
+        // 更新购物车显示
+        function updateCart() {
+            const count = document.getElementById('cart-count');
+            const items = document.getElementById('cart-items');
+            const totalPrice = document.getElementById('total-price');
+
+            count.textContent = cart.length;
+            totalPrice.textContent = total.toFixed(2);
+
+            items.innerHTML = '';
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.textContent = `${item.name} - ¥${item.price.toFixed(2)}`;
+                items.appendChild(div);
+            });
+        }
+
+        // 结账
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            document.getElementById('order-status').style.display = 'block';
+            document.getElementById('status-message').textContent = "Your order has been placed!";
+            
+            const steps = ['step1', 'step2', 'step3', 'step4'];
+            steps.forEach((s, i) => {
+                setTimeout(() => {
+                    document.getElementById(s).classList.add('active');
+                }, i * 1500);
+            });
+        });
+
+        // 初始化页面
+        window.onload = renderProducts;
+    </script>
 </body>
 </html>
