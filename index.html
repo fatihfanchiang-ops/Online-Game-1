@@ -135,7 +135,7 @@
         <div class="container">
             <h2>Your Cart <span id="cart-count">0</span></h2>
             <div id="cart-items" class="cart-items"></div>
-            <p class="total">Total: ¥<span id="total-price">0.00</span></p>
+            <p class="total">Total: NT$<span id="total-price">0.00</span></p>
             <button id="checkout-btn" class="checkout-btn">Place Order & Request Delivery</button>
         </div>
     </section>
@@ -161,7 +161,6 @@
     </section>
 
     <script>
-        // 只换了图片！价格、名字、功能 100% 保留你原来的
         const products = [
             {
                 id: 1,
@@ -196,7 +195,7 @@
                 card.innerHTML = `
                     <img src="${product.image}" class="product-img" alt="${product.name}">
                     <h3>${product.name}</h3>
-                    <p>¥${product.price.toFixed(2)}</p>
+                    <p>NT$${product.price.toFixed(2)}</p>
                     <button onclick="addToCart(${product.id})">Add to Cart</button>
                 `;
                 grid.appendChild(card);
@@ -222,7 +221,7 @@
             cart.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'cart-item';
-                div.textContent = `${item.name} - ¥${item.price.toFixed(2)}`;
+                div.textContent = `${item.name} - NT$${item.price.toFixed(2)}`;
                 items.appendChild(div);
             });
         }
