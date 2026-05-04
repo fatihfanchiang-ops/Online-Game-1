@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LTBrown Community - Online Store & Delivery</title>
-    <!-- 引入Font Awesome图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -124,7 +123,6 @@
     </style>
 </head>
 <body>
-    <!-- 页面头部 -->
     <header class="header">
         <div class="container">
             <h1><i class="fas fa-store"></i> LTBrown Community Store</h1>
@@ -132,7 +130,6 @@
         </div>
     </header>
 
-    <!-- 购物车区域 -->
     <section class="cart-section">
         <div class="container">
             <h2>Your Cart <span id="cart-count">0</span></h2>
@@ -142,17 +139,13 @@
         </div>
     </section>
 
-    <!-- 商品列表 -->
     <main class="products">
         <div class="container">
             <h2>Community Products</h2>
-            <div class="product-grid" id="product-grid">
-                <!-- 商品会自动渲染在这里 -->
-            </div>
+            <div class="product-grid" id="product-grid"></div>
         </div>
     </main>
 
-    <!-- 订单配送状态 -->
     <section class="order-status" id="order-status" style="display: none;">
         <div class="container">
             <h2>Order & Delivery Status</h2>
@@ -160,43 +153,40 @@
             <div class="delivery-tracker">
                 <div class="step" id="step1"><i class="fas fa-check"></i> Order Placed</div>
                 <div class="step" id="step2">Preparing</div>
-                <div class="step" id="step3">Out for Delivery</div>
+                <div class="step3">Out for Delivery</div>
                 <div class="step" id="step4">Delivered</div>
             </div>
         </div>
     </section>
 
     <script>
-        // 已按你给的信息配置好
         const products = [
             {
                 id: 1,
                 name: "可乐",
                 price: 100,
-                image: "https://tse1.mm.bing.net/th/id/OIP.N_qycw8cGloGXenMk0naJAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3"
+                image: "https://cdn-icons-png.flaticon.com/512/168/168726.png"
             },
             {
                 id: 2,
                 name: "橙子",
                 price: 200,
-                image: "https://th.bing.com/th/id/OIP.HCkyRzHTreMO3B0N2eaM6AHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+                image: "https://cdn-icons-png.flaticon.com/512/2909/2909685.png"
             },
             {
                 id: 3,
                 name: "农夫山泉",
                 price: 30,
-                image: "https://tse2.mm.bing.net/th/id/OIP.8ts8i2h0MFPF6NdKAPm-ewHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+                image: "https://cdn-icons-png.flaticon.com/512/3052/3052339.png"
             }
         ];
 
         let cart = [];
         let total = 0;
 
-        // 渲染商品
         function renderProducts() {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
-
             products.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
@@ -210,7 +200,6 @@
             });
         }
 
-        // 加入购物车
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             cart.push(product);
@@ -218,15 +207,10 @@
             updateCart();
         }
 
-        // 更新购物车显示
         function updateCart() {
-            const count = document.getElementById('cart-count');
+            document.getElementById('cart-count').textContent = cart.length;
+            document.getElementById('total-price').textContent = total.toFixed(2);
             const items = document.getElementById('cart-items');
-            const totalPrice = document.getElementById('total-price');
-
-            count.textContent = cart.length;
-            totalPrice.textContent = total.toFixed(2);
-
             items.innerHTML = '';
             cart.forEach(item => {
                 const div = document.createElement('div');
@@ -236,25 +220,19 @@
             });
         }
 
-        // 结账
         document.getElementById('checkout-btn').addEventListener('click', () => {
             if (cart.length === 0) {
                 alert("Your cart is empty!");
                 return;
             }
-
             document.getElementById('order-status').style.display = 'block';
             document.getElementById('status-message').textContent = "Your order has been placed!";
-            
-            const steps = ['step1', 'step2', 'step3', 'step4'];
-            steps.forEach((s, i) => {
-                setTimeout(() => {
-                    document.getElementById(s).classList.add('active');
-                }, i * 1500);
+            const steps = ['step1','step2','step3','step4'];
+            steps.forEach((s,i)=>{
+                setTimeout(()=>document.getElementById(s).classList.add('active'),i*1500);
             });
         });
 
-        // 初始化页面
         window.onload = renderProducts;
     </script>
 </body>
