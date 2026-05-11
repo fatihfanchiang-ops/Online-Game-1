@@ -13,7 +13,6 @@
             font-family: Arial, sans-serif;
         }
 
-        /* 登录注册页面 */
         .auth-wrap {
             height: 100vh;
             background: #2c3e50;
@@ -88,7 +87,7 @@
             cursor: pointer;
         }
 
-        /* 注册协议弹窗样式 */
+        /* 注册协议弹窗 */
         .agreement-modal {
             position: fixed;
             top: 0;
@@ -144,10 +143,9 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        /* 商店页面样式 */
+        /* 商店样式 */
         #store {
             display: none;
         }
@@ -230,8 +228,41 @@
         }
 
         .cart-item {
-            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
             border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 10px;
+        }
+
+        .cart-item-quantity button {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: #3498db;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .cart-item-remove {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .order-status {
@@ -275,8 +306,6 @@
             <p>3. 平台有权对违规账号进行限制或封禁处理。</p>
             <p>4. 用户在使用平台服务时需遵守国家法律法规。</p>
             <p>5. 本协议最终解释权归LTBrown Store所有。</p>
-            <p>6. 购物订单生成后需按时完成支付，商品配送以社区范围内为主。</p>
-            <p>7. 如有任何问题可联系客服进行咨询处理。</p>
         </div>
         <div class="checkbox-group">
             <input type="checkbox" id="agreeCheck">
@@ -350,7 +379,6 @@
     <section class="order-status" id="order-status" style="display: none;">
         <div class="container">
             <h2>Order & Delivery Status</h2>
-            <div id="status-message"></div>
             <div class="delivery-tracker">
                 <div class="step" id="step1"><i class="fas fa-check"></i> Order Placed</div>
                 <div class="step" id="step2">Preparing</div>
@@ -362,11 +390,16 @@
 </div>
 
 <script>
-    // 切换 Sign In / Sign Up 标签
+    // 存放所有注册账号
+    let userAccounts = [
+        // 预设一个测试账号
+        {username:"test", password:"123456"}
+    ];
+
+    // 切换标签
     function switchTab(type){
         document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
         event.target.classList.add('active');
-
         document.querySelectorAll('.auth-form').forEach(form=>form.classList.remove('show'));
         if(type === 'signin'){
             document.getElementById('signinForm').classList.add('show');
@@ -375,73 +408,80 @@
         }
     }
 
-    // 打开协议弹窗
+    // 打开注册协议弹窗
     function openAgreementModal() {
-        let user = document.getElementById('regUser').value;
-        let pwd = document.getElementById('regPwd').value;
+        let user = document.getElementById('regUser').value.trim();
+        let pwd = document.getElementById('regPwd').value.trim();
         if(!user || !pwd){
             alert('Please fill in all fields');
             return;
         }
-        // 清空勾选状态
+        // 检查账号是否已被注册
+        let exist = userAccounts.find(u => u.username === user);
+        if(exist){
+            alert('Username already exists! Please use another one');
+            return;
+        }
         document.getElementById('agreeCheck').checked = false;
         document.getElementById('agreementModal').style.display = 'flex';
     }
 
-    // 关闭弹窗
     function closeModal() {
         document.getElementById('agreementModal').style.display = 'none';
     }
 
-    // 确认同意协议
+    // 确认协议并注册
     function confirmAgreement() {
-        let isAgree = document.getElementById('agreeCheck').checked;
-        if(!isAgree){
-            alert('请勾选同意注册协议！');
+        if(!document.getElementById('agreeCheck').checked){
+            alert('Please agree the registration agreement first!');
             return;
         }
-        // 同意协议后完成注册
-        closeModal();
+        let user = document.getElementById('regUser').value.trim();
+        let pwd = document.getElementById('regPwd').value.trim();
+        // 保存新账号
+        userAccounts.push({username:user, password:pwd});
         alert('Sign Up Success! Please Sign In');
         switchTab('signin');
+        // 清空注册输入框
+        document.getElementById('regUser').value = '';
+        document.getElementById('regPwd').value = '';
+        closeModal();
     }
 
-    // 登录
+    // 登录：必须账号存在且密码正确
     function signIn(){
-        let user = document.getElementById('loginUser').value;
-        let pwd = document.getElementById('loginPwd').value;
-        if(user && pwd){
-            document.getElementById('authPage').style.display = 'none';
-            document.getElementById('store').style.display = 'block';
-        }else{
+        let user = document.getElementById('loginUser').value.trim();
+        let pwd = document.getElementById('loginPwd').value.trim();
+
+        if(!user || !pwd){
             alert('Please fill in username and password');
+            return;
         }
+
+        // 查找账号
+        let findUser = userAccounts.find(u => u.username === user);
+        if(!findUser){
+            alert('Account does not exist! Please sign up first');
+            return;
+        }
+        if(findUser.password !== pwd){
+            alert('Wrong password! Please try again');
+            return;
+        }
+
+        // 验证通过进入商店
+        document.getElementById('authPage').style.display = 'none';
+        document.getElementById('store').style.display = 'block';
     }
 
     // 商品数据
     const products = [
-        {
-            id: 1,
-            name: "可乐",
-            price: 100,
-            image: "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0430%2F39754390j00teb1870063d000u0018zm.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
-        },
-        {
-            id: 2,
-            name: "橙子",
-            price: 200,
-            image: "https://img2.baidu.com/it/u=2390670,1882300917&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=644"
-        },
-        {
-            id: 3,
-            name: "农夫山泉",
-            price: 30,
-            image: "https://img2.baidu.com/it/u=858356215,3685209921&fm=253&app=138&f=JPEG?w=800&h=1422"
-        }
+        { id: 1, name: "可乐", price: 100, image: "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0430%2F39754390j00teb1870063d000u0018zm.jpg&thumbnail=660x2147483647&quality=80&type=jpg" },
+        { id: 2, name: "橙子", price: 200, image: "https://img2.baidu.com/it/u=2390670,1882300917&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=644" },
+        { id: 3, name: "农夫山泉", price: 30, image: "https://img2.baidu.com/it/u=858356215,3685209921&fm=253&app=138&f=JPEG?w=800&h=1422" }
     ];
 
     let cart = [];
-    let total = 0;
 
     function renderProducts() {
         const grid = document.getElementById('product-grid');
@@ -460,28 +500,63 @@
 
     function addToCart(id) {
         const product = products.find(p => p.id === id);
-        cart.push(product);
-        total += product.price;
+        const exist = cart.find(item => item.id === id);
+        if (exist) {
+            exist.quantity++;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
         updateCart();
     }
 
     function updateCart() {
-        document.getElementById('cart-count').textContent = cart.length;
-        document.getElementById('total-price').textContent = total.toFixed(2);
-        const items = document.getElementById('cart-items');
-        items.innerHTML = '';
-        cart.forEach(item => {
+        const cartItemsEl = document.getElementById('cart-items');
+        const totalPriceEl = document.getElementById('total-price');
+        const cartCountEl = document.getElementById('cart-count');
+
+        cartItemsEl.innerHTML = '';
+        let total = 0;
+        let count = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price * item.quantity;
+            count += item.quantity;
+
             const div = document.createElement('div');
             div.className = 'cart-item';
-            div.textContent = `${item.name} - NT$${item.price.toFixed(2)}`;
-            items.appendChild(div);
+            div.innerHTML = `
+                <div class="cart-item-info">${item.name} NT$${item.price.toFixed(2)}</div>
+                <div class="cart-item-quantity">
+                    <button onclick="changeQuantity(${index}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="changeQuantity(${index}, 1)">+</button>
+                </div>
+                <button class="cart-item-remove" onclick="removeItem(${index})">Delete</button>
+            `;
+            cartItemsEl.appendChild(div);
         });
+
+        totalPriceEl.textContent = total.toFixed(2);
+        cartCountEl.textContent = count;
+    }
+
+    function changeQuantity(index, delta) {
+        cart[index].quantity += delta;
+        if (cart[index].quantity <= 0) {
+            cart.splice(index, 1);
+        }
+        updateCart();
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        updateCart();
     }
 
     document.getElementById('checkout-btn').addEventListener('click', () => {
-        if (cart.length === 0) { 
-            alert("Your cart is empty!"); 
-            return; 
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+            return;
         }
         document.getElementById('order-status').style.display = 'block';
         const steps = ['step1','step2','step3','step4'];
