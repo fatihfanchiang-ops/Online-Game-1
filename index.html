@@ -387,12 +387,10 @@
 </div>
 
 <script>
-    // 从本地读取账号列表，没有就初始化
+    // 账号永久存在浏览器
     let userAccounts = JSON.parse(localStorage.getItem('userAccounts')) || [
         {username:"test", password:"123456"}
     ];
-
-    // 保存账号到本地
     function saveUsers(){
         localStorage.setItem('userAccounts', JSON.stringify(userAccounts));
     }
@@ -409,7 +407,7 @@
         }
     }
 
-    // 打开注册协议弹窗
+    // 注册协议弹窗
     function openAgreementModal() {
         let user = document.getElementById('regUser').value.trim();
         let pwd = document.getElementById('regPwd').value.trim();
@@ -430,7 +428,7 @@
         document.getElementById('agreementModal').style.display = 'none';
     }
 
-    // 确认协议并注册
+    // 注册
     function confirmAgreement() {
         if(!document.getElementById('agreeCheck').checked){
             alert('Please agree the registration agreement first!');
@@ -447,7 +445,7 @@
         closeModal();
     }
 
-    // 登录：验证账号密码 + 记录登录状态
+    // 登录 + 记住登录状态
     function signIn(){
         let user = document.getElementById('loginUser').value.trim();
         let pwd = document.getElementById('loginPwd').value.trim();
@@ -467,8 +465,10 @@
             return;
         }
 
-        // 保存登录状态，下次自动登录
-        localStorage.setItem('loginUser', JSON.stringify({username:user}));
+        // 关键：记录已登录
+        localStorage.setItem('isLogin', 'true');
+        localStorage.setItem('nowUser', user);
+
         document.getElementById('authPage').style.display = 'none';
         document.getElementById('store').style.display = 'block';
     }
@@ -564,12 +564,11 @@
         });
     });
 
-    // 页面加载：有登录记录就自动进商店
+    // 页面一打开：如果已经登录过，直接进商店
     window.onload = function(){
         renderProducts();
-        let localLogin = localStorage.getItem('loginUser');
-        if(localLogin){
-            // 自动登录，不用再输账号密码
+        // 判断是否已经登录
+        if(localStorage.getItem('isLogin') === 'true'){
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('store').style.display = 'block';
         }
