@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - LTBrown Store</title>
+    <title>LTBrown Store - Sign In / Sign Up</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -13,39 +13,59 @@
             font-family: Arial, sans-serif;
         }
 
-        /* 登录页面样式 */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* 登录注册页面 */
+        .auth-wrap {
             height: 100vh;
             background: #2c3e50;
-            flex-direction: column;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
+        .auth-box {
+            background: #fff;
             width: 100%;
             max-width: 400px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #0003;
         }
 
-        .login-box h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #2c3e50;
+        .tab-btns {
+            display: flex;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #eee;
+        }
+
+        .tab-btn.active {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.show {
+            display: block;
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
 
         .input-group input {
@@ -53,21 +73,25 @@
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 15px;
         }
 
-        .login-btn {
+        .submit-btn {
             width: 100%;
             padding: 12px;
-            background: #27ae60;
-            color: white;
             border: none;
-            border-radius: 5px;
+            background: #27ae60;
+            color: #fff;
             font-size: 16px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
         /* 商店页面样式 */
+        #store {
+            display: none;
+        }
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -128,6 +152,28 @@
             margin: 0 auto 10px;
         }
 
+        .product-card h3 {
+            margin: 10px 0;
+        }
+
+        .product-card button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            margin: 10px 0;
+        }
+
+        .cart-item {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
         .order-status {
             background: #f1f1f1;
             padding: 20px;
@@ -153,32 +199,47 @@
             background: #27ae60;
             color: white;
         }
-
-        /* 隐藏商店 */
-        #store {
-            display: none;
-        }
     </style>
 </head>
 <body>
 
-<!-- 登录界面 -->
-<div id="login" class="login-container">
-    <div class="login-box">
-        <h2>Store Login</h2>
-        <div class="input-group">
-            <label>Username</label>
-            <input type="text" id="username" placeholder="Enter username">
+<!-- 登录注册区域 -->
+<div class="auth-wrap" id="authPage">
+    <div class="auth-box">
+        <div class="tab-btns">
+            <button class="tab-btn active" onclick="switchTab('signin')">Sign In</button>
+            <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
         </div>
-        <div class="input-group">
-            <label>Password</label>
-            <input type="password" id="password" placeholder="Enter password">
+
+        <!-- 登录表单 -->
+        <div class="auth-form show" id="signinForm">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="loginUser" placeholder="Enter username">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPwd" placeholder="Enter password">
+            </div>
+            <button class="submit-btn" onclick="signIn()">Sign In</button>
         </div>
-        <button class="login-btn" onclick="login()">Login</button>
+
+        <!-- 注册表单 -->
+        <div class="auth-form" id="signupForm">
+            <div class="input-group">
+                <label>Create Username</label>
+                <input type="text" id="regUser" placeholder="Create username">
+            </div>
+            <div class="input-group">
+                <label>Create Password</label>
+                <input type="password" id="regPwd" placeholder="Create password">
+            </div>
+            <button class="submit-btn" onclick="signUp()">Sign Up</button>
+        </div>
     </div>
 </div>
 
-<!-- 商店页面（默认隐藏） -->
+<!-- 商店主页 -->
 <div id="store">
     <header class="header">
         <div class="container">
@@ -218,17 +279,65 @@
 </div>
 
 <script>
-    // 登录功能：随便输入都能进
-    function login() {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("store").style.display = "block";
+    // 切换 Sign In / Sign Up 标签
+    function switchTab(type){
+        // 切换按钮样式
+        document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // 切换表单
+        document.querySelectorAll('.auth-form').forEach(form=>form.classList.remove('show'));
+        if(type === 'signin'){
+            document.getElementById('signinForm').classList.add('show');
+        }else{
+            document.getElementById('signupForm').classList.add('show');
+        }
+    }
+
+    // 注册：随便输入就提示注册成功
+    function signUp(){
+        let user = document.getElementById('regUser').value;
+        let pwd = document.getElementById('regPwd').value;
+        if(user && pwd){
+            alert('Sign Up Success! Please Sign In');
+            switchTab('signin');
+        }else{
+            alert('Please fill in all fields');
+        }
+    }
+
+    // 登录：随便输入直接进商店
+    function signIn(){
+        let user = document.getElementById('loginUser').value;
+        let pwd = document.getElementById('loginPwd').value;
+        if(user && pwd){
+            document.getElementById('authPage').style.display = 'none';
+            document.getElementById('store').style.display = 'block';
+        }else{
+            alert('Please fill in username and password');
+        }
     }
 
     // 商品数据
     const products = [
-        { id: 1, name: "可乐", price: 100, image: "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0430%2F39754390j00teb1870063d000u0018zm.jpg&thumbnail=660x2147483647&quality=80&type=jpg" },
-        { id: 2, name: "橙子", price: 200, image: "https://img2.baidu.com/it/u=2390670,1882300917&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=644" },
-        { id: 3, name: "农夫山泉", price: 30, image: "https://img2.baidu.com/it/u=858356215,3685209921&fm=253&app=138&f=JPEG?w=800&h=1422" }
+        {
+            id: 1,
+            name: "可乐",
+            price: 100,
+            image: "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0430%2F39754390j00teb1870063d000u0018zm.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
+        },
+        {
+            id: 2,
+            name: "橙子",
+            price: 200,
+            image: "https://img2.baidu.com/it/u=2390670,1882300917&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=644"
+        },
+        {
+            id: 3,
+            name: "农夫山泉",
+            price: 30,
+            image: "https://img2.baidu.com/it/u=858356215,3685209921&fm=253&app=138&f=JPEG?w=800&h=1422"
+        }
     ];
 
     let cart = [];
@@ -270,9 +379,13 @@
     }
 
     document.getElementById('checkout-btn').addEventListener('click', () => {
-        if (cart.length === 0) { alert("Your cart is empty!"); return; }
+        if (cart.length === 0) { 
+            alert("Your cart is empty!"); 
+            return; 
+        }
         document.getElementById('order-status').style.display = 'block';
-        ['step1','step2','step3','step4'].forEach((s,i)=>{
+        const steps = ['step1','step2','step3','step4'];
+        steps.forEach((s,i)=>{
             setTimeout(()=>document.getElementById(s).classList.add('active'),i*1500);
         });
     });
