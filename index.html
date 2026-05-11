@@ -29,6 +29,7 @@
             padding: 35px;
             border-radius: 10px;
             box-shadow: 0 0 15px #0003;
+            position: relative;
         }
 
         .tab-btns {
@@ -85,6 +86,65 @@
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
+        }
+
+        /* 注册协议弹窗样式 */
+        .agreement-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .agreement-text {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .checkbox-group {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 12px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
         /* 商店页面样式 */
@@ -203,6 +263,29 @@
 </head>
 <body>
 
+<!-- 注册协议弹窗 -->
+<div class="agreement-modal" id="agreementModal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2>用户注册协议</h2>
+        <div class="agreement-text">
+            <p>欢迎注册LTBrown Store账号！</p>
+            <p>1. 用户应保证注册信息的真实性、有效性。</p>
+            <p>2. 账号仅限本人使用，不得转借、转让他人。</p>
+            <p>3. 平台有权对违规账号进行限制或封禁处理。</p>
+            <p>4. 用户在使用平台服务时需遵守国家法律法规。</p>
+            <p>5. 本协议最终解释权归LTBrown Store所有。</p>
+            <p>6. 购物订单生成后需按时完成支付，商品配送以社区范围内为主。</p>
+            <p>7. 如有任何问题可联系客服进行咨询处理。</p>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="agreeCheck">
+            <label for="agreeCheck">我已阅读并同意以上注册协议</label>
+        </div>
+        <button class="modal-btn" onclick="confirmAgreement()">确认同意并注册</button>
+    </div>
+</div>
+
 <!-- 登录注册区域 -->
 <div class="auth-wrap" id="authPage">
     <div class="auth-box">
@@ -234,7 +317,7 @@
                 <label>Create Password</label>
                 <input type="password" id="regPwd" placeholder="Create password">
             </div>
-            <button class="submit-btn" onclick="signUp()">Sign Up</button>
+            <button class="submit-btn" onclick="openAgreementModal()">Sign Up</button>
         </div>
     </div>
 </div>
@@ -281,11 +364,9 @@
 <script>
     // 切换 Sign In / Sign Up 标签
     function switchTab(type){
-        // 切换按钮样式
         document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
         event.target.classList.add('active');
 
-        // 切换表单
         document.querySelectorAll('.auth-form').forEach(form=>form.classList.remove('show'));
         if(type === 'signin'){
             document.getElementById('signinForm').classList.add('show');
@@ -294,19 +375,38 @@
         }
     }
 
-    // 注册：随便输入就提示注册成功
-    function signUp(){
+    // 打开协议弹窗
+    function openAgreementModal() {
         let user = document.getElementById('regUser').value;
         let pwd = document.getElementById('regPwd').value;
-        if(user && pwd){
-            alert('Sign Up Success! Please Sign In');
-            switchTab('signin');
-        }else{
+        if(!user || !pwd){
             alert('Please fill in all fields');
+            return;
         }
+        // 清空勾选状态
+        document.getElementById('agreeCheck').checked = false;
+        document.getElementById('agreementModal').style.display = 'flex';
     }
 
-    // 登录：随便输入直接进商店
+    // 关闭弹窗
+    function closeModal() {
+        document.getElementById('agreementModal').style.display = 'none';
+    }
+
+    // 确认同意协议
+    function confirmAgreement() {
+        let isAgree = document.getElementById('agreeCheck').checked;
+        if(!isAgree){
+            alert('请勾选同意注册协议！');
+            return;
+        }
+        // 同意协议后完成注册
+        closeModal();
+        alert('Sign Up Success! Please Sign In');
+        switchTab('signin');
+    }
+
+    // 登录
     function signIn(){
         let user = document.getElementById('loginUser').value;
         let pwd = document.getElementById('loginPwd').value;
