@@ -323,7 +323,6 @@
             <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
         </div>
 
-        <!-- 登录表单 -->
         <div class="auth-form show" id="signinForm">
             <div class="input-group">
                 <label>Username</label>
@@ -336,7 +335,6 @@
             <button class="submit-btn" onclick="signIn()">Sign In</button>
         </div>
 
-        <!-- 注册表单 -->
         <div class="auth-form" id="signupForm">
             <div class="input-group">
                 <label>Create Username</label>
@@ -351,7 +349,6 @@
     </div>
 </div>
 
-<!-- 商店主页 -->
 <div id="store">
     <header class="header">
         <div class="container">
@@ -390,11 +387,15 @@
 </div>
 
 <script>
-    // 存放所有注册账号
-    let userAccounts = [
-        // 预设一个测试账号
+    // 从本地读取账号列表，没有就初始化
+    let userAccounts = JSON.parse(localStorage.getItem('userAccounts')) || [
         {username:"test", password:"123456"}
     ];
+
+    // 保存账号到本地
+    function saveUsers(){
+        localStorage.setItem('userAccounts', JSON.stringify(userAccounts));
+    }
 
     // 切换标签
     function switchTab(type){
@@ -416,7 +417,6 @@
             alert('Please fill in all fields');
             return;
         }
-        // 检查账号是否已被注册
         let exist = userAccounts.find(u => u.username === user);
         if(exist){
             alert('Username already exists! Please use another one');
@@ -438,17 +438,16 @@
         }
         let user = document.getElementById('regUser').value.trim();
         let pwd = document.getElementById('regPwd').value.trim();
-        // 保存新账号
         userAccounts.push({username:user, password:pwd});
+        saveUsers();
         alert('Sign Up Success! Please Sign In');
         switchTab('signin');
-        // 清空注册输入框
         document.getElementById('regUser').value = '';
         document.getElementById('regPwd').value = '';
         closeModal();
     }
 
-    // 登录：必须账号存在且密码正确
+    // 登录：验证账号密码 + 记录登录状态
     function signIn(){
         let user = document.getElementById('loginUser').value.trim();
         let pwd = document.getElementById('loginPwd').value.trim();
@@ -458,7 +457,6 @@
             return;
         }
 
-        // 查找账号
         let findUser = userAccounts.find(u => u.username === user);
         if(!findUser){
             alert('Account does not exist! Please sign up first');
@@ -469,7 +467,8 @@
             return;
         }
 
-        // 验证通过进入商店
+        // 保存登录状态，下次自动登录
+        localStorage.setItem('loginUser', JSON.stringify({username:user}));
         document.getElementById('authPage').style.display = 'none';
         document.getElementById('store').style.display = 'block';
     }
@@ -565,7 +564,16 @@
         });
     });
 
-    window.onload = renderProducts;
+    // 页面加载：有登录记录就自动进商店
+    window.onload = function(){
+        renderProducts();
+        let localLogin = localStorage.getItem('loginUser');
+        if(localLogin){
+            // 自动登录，不用再输账号密码
+            document.getElementById('authPage').style.display = 'none';
+            document.getElementById('store').style.display = 'block';
+        }
+    };
 </script>
 </body>
 </html>
