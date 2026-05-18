@@ -323,6 +323,10 @@
                 <input type="text" id="loginUser" placeholder="Enter username">
             </div>
             <div class="input-group">
+                <label>Phone Number</label>
+                <input type="tel" id="loginPhone" placeholder="Enter your phone number">
+            </div>
+            <div class="input-group">
                 <label>Password</label>
                 <input type="password" id="loginPwd" placeholder="Enter password">
             </div>
@@ -333,6 +337,10 @@
             <div class="input-group">
                 <label>Create Username</label>
                 <input type="text" id="regUser" placeholder="Create username">
+            </div>
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="tel" id="regPhone" placeholder="Enter your phone number">
             </div>
             <div class="input-group">
                 <label>Create Password</label>
@@ -401,7 +409,7 @@
 
     // 本地账号存储
     let userAccounts = JSON.parse(localStorage.getItem('userAccounts')) || [
-        {username:"test", password:"123456"}
+        {username:"test", phone:"123456789", password:"123456"}
     ];
     function saveUsers(){
         localStorage.setItem('userAccounts', JSON.stringify(userAccounts));
@@ -421,9 +429,10 @@
     function openAgreementModal() {
         document.getElementById("dynamicAgreementContent").innerHTML = getDynamicRegistrationAgreement();
         let user = document.getElementById('regUser').value.trim();
+        let phone = document.getElementById('regPhone').value.trim();
         let pwd = document.getElementById('regPwd').value.trim();
 
-        if(!user || !pwd){
+        if(!user || !phone || !pwd){
             alert('Please fill in all fields');
             return;
         }
@@ -448,12 +457,15 @@
             return;
         }
         let user = document.getElementById('regUser').value.trim();
+        let phone = document.getElementById('regPhone').value.trim();
         let pwd = document.getElementById('regPwd').value.trim();
-        userAccounts.push({username:user, password:pwd});
+        
+        userAccounts.push({username:user, phone:phone, password:pwd});
         saveUsers();
         alert('Sign Up Success! Please Sign In');
         switchTab('signin');
         document.getElementById('regUser').value = '';
+        document.getElementById('regPhone').value = '';
         document.getElementById('regPwd').value = '';
         closeModal();
     }
@@ -461,20 +473,24 @@
     // 登录逻辑
     function signIn(){
         let user = document.getElementById('loginUser').value.trim();
+        let phone = document.getElementById('loginPhone').value.trim();
         let pwd = document.getElementById('loginPwd').value.trim();
-        if(!user || !pwd){
-            alert('Please fill in username and password');
+        
+        if(!user || !phone || !pwd){
+            alert('Please fill in username, phone and password');
             return;
         }
-        let findUser = userAccounts.find(u => u.username === user);
+        
+        let findUser = userAccounts.find(u => u.username === user && u.phone === phone);
         if(!findUser){
-            alert('Account does not exist! Please sign up first');
+            alert('Account or phone number does not exist!');
             return;
         }
         if(findUser.password !== pwd){
             alert('Wrong password! Please try again');
             return;
         }
+        
         localStorage.setItem('isLogin', 'true');
         localStorage.setItem('nowUser', user);
         document.getElementById('authPage').style.display = 'none';
