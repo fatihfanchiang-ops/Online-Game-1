@@ -300,7 +300,7 @@
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <h2>用户注册协议</h2>
         <div class="agreement-text" id="dynamicAgreementContent">
-            <!-- 动态协议内容会加载到这里 -->
+            <!-- 动态加载协议内容 -->
         </div>
         <div class="checkbox-group">
             <input type="checkbox" id="agreeCheck">
@@ -382,9 +382,7 @@
 </div>
 
 <script>
-    // ==============================================
-    // 🔥 动态注册协议（在这里修改，所有用户自动更新）
-    // ==============================================
+    // 动态注册协议配置区，修改这里即可更新协议
     function getDynamicRegistrationAgreement() {
         return `
             <p>欢迎注册LTBrown Store账号！</p>
@@ -393,11 +391,11 @@
             <p>3. 平台有权对违规账号进行限制或封禁处理。</p>
             <p>4. 用户在使用平台服务时需遵守国家法律法规。</p>
             <p>5. 本协议最终解释权归LTBrown Store所有。</p>
-            <p>6. 平台可随时更新协议，无需单独通知用户。</p>
+            <p>6. 平台可随时更新注册协议，不再单独通知用户。</p>
         `;
     }
 
-    // 账号永久存在浏览器
+    // 本地账号存储
     let userAccounts = JSON.parse(localStorage.getItem('userAccounts')) || [
         {username:"test", password:"123456"}
     ];
@@ -405,25 +403,22 @@
         localStorage.setItem('userAccounts', JSON.stringify(userAccounts));
     }
 
-    // 切换标签
+    // 切换登录注册标签
     function switchTab(type){
         document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
         event.target.classList.add('active');
         document.querySelectorAll('.auth-form').forEach(form=>form.classList.remove('show'));
-        if(type === 'signin'){
-            document.getElementById('signinForm').classList.add('show');
-        }else{
-            document.getElementById('signupForm').classList.add('show');
-        }
+        type === 'signin' 
+            ? document.getElementById('signinForm').classList.add('show')
+            : document.getElementById('signupForm').classList.add('show');
     }
 
-    // 注册协议弹窗（打开时加载最新协议）
+    // 打开协议弹窗并加载最新协议
     function openAgreementModal() {
-        // 加载最新协议
         document.getElementById("dynamicAgreementContent").innerHTML = getDynamicRegistrationAgreement();
-        
         let user = document.getElementById('regUser').value.trim();
         let pwd = document.getElementById('regPwd').value.trim();
+
         if(!user || !pwd){
             alert('Please fill in all fields');
             return;
@@ -437,11 +432,12 @@
         document.getElementById('agreementModal').style.display = 'flex';
     }
 
+    // 关闭弹窗
     function closeModal() {
         document.getElementById('agreementModal').style.display = 'none';
     }
 
-    // 注册
+    // 确认协议完成注册
     function confirmAgreement() {
         if(!document.getElementById('agreeCheck').checked){
             alert('Please agree the registration agreement first!');
@@ -458,16 +454,14 @@
         closeModal();
     }
 
-    // 登录 + 记住登录状态
+    // 登录逻辑
     function signIn(){
         let user = document.getElementById('loginUser').value.trim();
         let pwd = document.getElementById('loginPwd').value.trim();
-
         if(!user || !pwd){
             alert('Please fill in username and password');
             return;
         }
-
         let findUser = userAccounts.find(u => u.username === user);
         if(!findUser){
             alert('Account does not exist! Please sign up first');
@@ -477,11 +471,8 @@
             alert('Wrong password! Please try again');
             return;
         }
-
-        // 关键：记录已登录
         localStorage.setItem('isLogin', 'true');
         localStorage.setItem('nowUser', user);
-
         document.getElementById('authPage').style.display = 'none';
         document.getElementById('store').style.display = 'block';
     }
@@ -525,15 +516,11 @@
         const cartItemsEl = document.getElementById('cart-items');
         const totalPriceEl = document.getElementById('total-price');
         const cartCountEl = document.getElementById('cart-count');
-
         cartItemsEl.innerHTML = '';
-        let total = 0;
-        let count = 0;
-
+        let total = 0, count = 0;
         cart.forEach((item, index) => {
             total += item.price * item.quantity;
             count += item.quantity;
-
             const div = document.createElement('div');
             div.className = 'cart-item';
             div.innerHTML = `
@@ -547,16 +534,13 @@
             `;
             cartItemsEl.appendChild(div);
         });
-
         totalPriceEl.textContent = total.toFixed(2);
         cartCountEl.textContent = count;
     }
 
     function changeQuantity(index, delta) {
         cart[index].quantity += delta;
-        if (cart[index].quantity <= 0) {
-            cart.splice(index, 1);
-        }
+        if (cart[index].quantity <= 0) cart.splice(index, 1);
         updateCart();
     }
 
@@ -577,10 +561,8 @@
         });
     });
 
-    // 页面一打开：如果已经登录过，直接进商店
     window.onload = function(){
         renderProducts();
-        // 判断是否已经登录
         if(localStorage.getItem('isLogin') === 'true'){
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('store').style.display = 'block';
