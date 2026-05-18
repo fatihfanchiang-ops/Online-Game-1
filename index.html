@@ -299,13 +299,8 @@
     <div class="modal-content">
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <h2>用户注册协议</h2>
-        <div class="agreement-text">
-            <p>欢迎注册LTBrown Store账号！</p>
-            <p>1. 用户应保证注册信息的真实性、有效性。</p>
-            <p>2. 账号仅限本人使用，不得转借、转让他人。</p>
-            <p>3. 平台有权对违规账号进行限制或封禁处理。</p>
-            <p>4. 用户在使用平台服务时需遵守国家法律法规。</p>
-            <p>5. 本协议最终解释权归LTBrown Store所有。</p>
+        <div class="agreement-text" id="dynamicAgreementContent">
+            <!-- 动态协议内容会加载到这里 -->
         </div>
         <div class="checkbox-group">
             <input type="checkbox" id="agreeCheck">
@@ -387,6 +382,21 @@
 </div>
 
 <script>
+    // ==============================================
+    // 🔥 动态注册协议（在这里修改，所有用户自动更新）
+    // ==============================================
+    function getDynamicRegistrationAgreement() {
+        return `
+            <p>欢迎注册LTBrown Store账号！</p>
+            <p>1. 用户应保证注册信息的真实性、有效性。</p>
+            <p>2. 账号仅限本人使用，不得转借、转让他人。</p>
+            <p>3. 平台有权对违规账号进行限制或封禁处理。</p>
+            <p>4. 用户在使用平台服务时需遵守国家法律法规。</p>
+            <p>5. 本协议最终解释权归LTBrown Store所有。</p>
+            <p>6. 平台可随时更新协议，无需单独通知用户。</p>
+        `;
+    }
+
     // 账号永久存在浏览器
     let userAccounts = JSON.parse(localStorage.getItem('userAccounts')) || [
         {username:"test", password:"123456"}
@@ -407,8 +417,11 @@
         }
     }
 
-    // 注册协议弹窗
+    // 注册协议弹窗（打开时加载最新协议）
     function openAgreementModal() {
+        // 加载最新协议
+        document.getElementById("dynamicAgreementContent").innerHTML = getDynamicRegistrationAgreement();
+        
         let user = document.getElementById('regUser').value.trim();
         let pwd = document.getElementById('regPwd').value.trim();
         if(!user || !pwd){
