@@ -160,7 +160,6 @@
             background: #2c3e50;
             color: white;
             padding: 30px 0;
-            text-align: center;
         }
 
         .cart-section {
@@ -346,9 +345,14 @@
 
 <div id="store">
     <header class="header">
-        <div class="container">
-            <h1><i class="fas fa-store"></i> LTBrown Community Store</h1>
-            <p>Fast Delivery for Our Community</p>
+        <div class="container" style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+                <h1><i class="fas fa-store"></i> LTBrown Community Store</h1>
+                <p>Fast Delivery for Our Community</p>
+            </div>
+            <button id="logoutBtn" style="padding:8px 16px;background:#e74c3c;color:#fff;border:none;border-radius:5px;cursor:pointer;display:none;">
+                Log Out
+            </button>
         </div>
     </header>
 
@@ -475,7 +479,20 @@
         localStorage.setItem('nowUser', user);
         document.getElementById('authPage').style.display = 'none';
         document.getElementById('store').style.display = 'block';
+        // 登录后显示退出按钮
+        document.getElementById('logoutBtn').style.display = 'inline-block';
     }
+
+    // 退出登录
+    function logout() {
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('nowUser');
+        cart = [];
+        updateCart();
+        document.getElementById('authPage').style.display = 'flex';
+        document.getElementById('store').style.display = 'none';
+    }
+    document.getElementById('logoutBtn').addEventListener('click', logout);
 
     // 商品数据
     const products = [
@@ -566,6 +583,7 @@
         if(localStorage.getItem('isLogin') === 'true'){
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('store').style.display = 'block';
+            document.getElementById('logoutBtn').style.display = 'inline-block';
         }
     };
 </script>
