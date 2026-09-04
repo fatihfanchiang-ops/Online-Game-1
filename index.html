@@ -12,7 +12,6 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-
         .auth-wrap {
             height: 100vh;
             background: #2c3e50;
@@ -20,7 +19,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .auth-box {
             background: #fff;
             width: 100%;
@@ -30,12 +28,10 @@
             box-shadow: 0 0 15px #0003;
             position: relative;
         }
-
         .tab-btns {
             display: flex;
             margin-bottom: 25px;
         }
-
         .tab-btn {
             flex: 1;
             border: none;
@@ -44,30 +40,24 @@
             cursor: pointer;
             background: #eee;
         }
-
         .tab-btn.active {
             background: #27ae60;
             color: #fff;
         }
-
         .auth-form {
             display: none;
         }
-
         .auth-form.show {
             display: block;
         }
-
         .input-group {
             margin-bottom: 18px;
         }
-
         .input-group label {
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
         }
-
         .input-group input {
             width: 100%;
             padding: 12px;
@@ -75,7 +65,6 @@
             border-radius: 5px;
             font-size: 15px;
         }
-
         .submit-btn {
             width: 100%;
             padding: 12px;
@@ -86,7 +75,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         /* 注册协议弹窗 */
         .agreement-modal {
             position: fixed;
@@ -100,7 +88,6 @@
             justify-content: center;
             z-index: 9999;
         }
-
         .modal-content {
             background: white;
             width: 90%;
@@ -109,7 +96,6 @@
             border-radius: 10px;
             position: relative;
         }
-
         .modal-close {
             position: absolute;
             top: 15px;
@@ -118,7 +104,6 @@
             cursor: pointer;
             color: #666;
         }
-
         .agreement-text {
             height: 200px;
             overflow-y: auto;
@@ -127,14 +112,12 @@
             margin: 15px 0;
             line-height: 1.6;
         }
-
         .checkbox-group {
             margin: 15px 0;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
         .modal-btn {
             width: 100%;
             padding: 12px;
@@ -144,37 +127,31 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         /* 商店样式 */
         #store {
             display: none;
         }
-
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .header {
             background: #2c3e50;
             color: white;
             padding: 30px 0;
         }
-
         .cart-section {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
         }
-
         .total {
             font-size: 1.2rem;
             font-weight: bold;
             margin: 10px 0;
         }
-
         .checkout-btn {
             background: #27ae60;
             color: white;
@@ -184,35 +161,29 @@
             cursor: pointer;
             font-size: 1rem;
         }
-
         .products h2 {
             margin-bottom: 20px;
         }
-
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
         }
-
         .product-card {
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 15px;
             text-align: center;
         }
-
         .product-img {
             width: 120px;
             height: 120px;
             object-fit: contain;
             margin: 0 auto 10px;
         }
-
         .product-card h3 {
             margin: 10px 0;
         }
-
         .product-card button {
             background: #3498db;
             color: white;
@@ -221,11 +192,9 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .cart-items {
             margin: 10px 0;
         }
-
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -233,18 +202,15 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
-
         .cart-item-info {
             flex: 1;
         }
-
         .cart-item-quantity {
             display: flex;
             align-items: center;
             gap: 8px;
             margin: 0 10px;
         }
-
         .cart-item-quantity button {
             width: 28px;
             height: 28px;
@@ -254,7 +220,6 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
         .cart-item-remove {
             background: #e74c3c;
             color: white;
@@ -263,20 +228,17 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
         .order-status {
             background: #f1f1f1;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
         }
-
         .delivery-tracker {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
         }
-
         .step {
             text-align: center;
             padding: 10px;
@@ -284,15 +246,71 @@
             border-radius: 5px;
             width: 23%;
         }
-
         .step.active {
             background: #27ae60;
             color: white;
         }
+        /* ===== Admin Panel 新增样式 ===== */
+        .admin-panel{
+            background:#fff3cd;
+            border:2px solid #ffc107;
+            padding:24px;
+            border-radius:10px;
+            margin:20px 0;
+            display:none;
+        }
+        .admin-panel h2{
+            color:#856404;
+            margin-bottom:16px;
+        }
+        .admin-row{
+            display:grid;
+            grid-template-columns:1fr 1fr 1fr 1fr;
+            gap:10px;
+            margin-bottom:12px;
+        }
+        .admin-row input{
+            padding:9px;
+            border:1px solid #bbb;
+            border-radius:4px;
+        }
+        .admin-btn-add{
+            background:#27ae60;
+            color:white;
+            border:none;
+            padding:9px 14px;
+            border-radius:4px;
+            cursor:pointer;
+        }
+        .admin-item{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:10px;
+            background:#fff;
+            margin:8px 0;
+            border-radius:6px;
+        }
+        .admin-btn-edit{
+            background:#3498db;
+            color:white;
+            border:none;
+            padding:6px 10px;
+            border-radius:4px;
+            cursor:pointer;
+            margin-right:6px;
+        }
+        .admin-btn-del{
+            background:#e74c3c;
+            color:white;
+            border:none;
+            padding:6px 10px;
+            border-radius:4px;
+            cursor:pointer;
+        }
     </style>
 </head>
 <body>
-
 <!-- 注册协议弹窗 -->
 <div class="agreement-modal" id="agreementModal">
     <div class="modal-content">
@@ -308,7 +326,6 @@
         <button class="modal-btn" onclick="confirmAgreement()">确认同意并注册</button>
     </div>
 </div>
-
 <!-- 登录注册区域 -->
 <div class="auth-wrap" id="authPage">
     <div class="auth-box">
@@ -316,7 +333,6 @@
             <button class="tab-btn active" onclick="switchTab('signin')">Sign In</button>
             <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
         </div>
-
         <div class="auth-form show" id="signinForm">
             <div class="input-group">
                 <label>Username</label>
@@ -332,7 +348,6 @@
             </div>
             <button class="submit-btn" onclick="signIn()">Sign In</button>
         </div>
-
         <div class="auth-form" id="signupForm">
             <div class="input-group">
                 <label>Create Username</label>
@@ -350,7 +365,6 @@
         </div>
     </div>
 </div>
-
 <div id="store">
     <header class="header">
         <div class="container" style="display:flex;justify-content:space-between;align-items:center;">
@@ -364,6 +378,23 @@
         </div>
     </header>
 
+    <!-- ========== Admin Management Panel ========== -->
+    <div class="container">
+        <div class="admin-panel" id="adminPanel">
+            <h2><i class="fas fa-cog"></i> Admin Login: Manage Products & Inventory</h2>
+            <div class="admin-row">
+                <input type="text" id="prodName" placeholder="Product Name">
+                <input type="number" id="prodPrice" placeholder="Price">
+                <input type="number" id="prodStock" placeholder="Inventory Stock">
+                <input type="text" id="prodImg" placeholder="Image URL">
+            </div>
+            <button class="admin-btn-add" onclick="addProduct()">Add New Product</button>
+            <hr style="margin:15px 0;">
+            <h3>Product List (Edit / Remove / Update Stock)</h3>
+            <div id="adminProductList"></div>
+        </div>
+    </div>
+
     <section class="cart-section">
         <div class="container">
             <h2>Your Cart <span id="cart-count">0</span></h2>
@@ -372,14 +403,12 @@
             <button id="checkout-btn" class="checkout-btn">Place Order & Request Delivery</button>
         </div>
     </section>
-
     <main class="products">
         <div class="container">
             <h2>Community Products</h2>
             <div class="product-grid" id="product-grid"></div>
         </div>
     </main>
-
     <section class="order-status" id="order-status" style="display: none;">
         <div class="container">
             <h2>Order & Delivery Status</h2>
@@ -392,7 +421,6 @@
         </div>
     </section>
 </div>
-
 <script>
     // 动态注册协议配置区，修改这里即可更新协议
     function getDynamicRegistrationAgreement() {
@@ -406,13 +434,26 @@
             <p>6. 平台可随时更新注册协议，不再单独通知用户。</p>
         `;
     }
-
     // 本地账号存储
     let userAccounts = JSON.parse(localStorage.getItem('userAccounts')) || [
         {username:"test", phone:"123456789", password:"123456"}
     ];
+    // Admin account
+    const ADMIN_USERNAME = "admin";
+    const ADMIN_PASSWORD = "admin123";
+
     function saveUsers(){
         localStorage.setItem('userAccounts', JSON.stringify(userAccounts));
+    }
+
+    // 商品带库存，localStorage持久化
+    let products = JSON.parse(localStorage.getItem("storeProducts")) || [
+        { id: 1, name: "可乐", price: 100, stock: 50, image: "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0430%2F39754390j00teb1870063d000u0018zm.jpg&thumbnail=660x2147483647&quality=80&type=jpg" },
+        { id: 2, name: "橙子", price: 200, stock: 30, image: "https://img2.baidu.com/it/u=2390670,1882300917&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=644" },
+        { id: 3, name: "农夫山泉", price: 30, stock: 100, image: "https://img2.baidu.com/it/u=858356215,3685209921&fm=253&app=138&f=JPEG?w=800&h=1422" }
+    ];
+    function saveProducts(){
+        localStorage.setItem("storeProducts", JSON.stringify(products));
     }
 
     // 切换登录注册标签
@@ -424,14 +465,12 @@
             ? document.getElementById('signinForm').classList.add('show')
             : document.getElementById('signupForm').classList.add('show');
     }
-
     // 打开协议弹窗并加载最新协议
     function openAgreementModal() {
         document.getElementById("dynamicAgreementContent").innerHTML = getDynamicRegistrationAgreement();
         let user = document.getElementById('regUser').value.trim();
         let phone = document.getElementById('regPhone').value.trim();
         let pwd = document.getElementById('regPwd').value.trim();
-
         if(!user || !phone || !pwd){
             alert('Please fill in all fields');
             return;
@@ -444,12 +483,10 @@
         document.getElementById('agreeCheck').checked = false;
         document.getElementById('agreementModal').style.display = 'flex';
     }
-
     // 关闭弹窗
     function closeModal() {
         document.getElementById('agreementModal').style.display = 'none';
     }
-
     // 确认协议完成注册
     function confirmAgreement() {
         if(!document.getElementById('agreeCheck').checked){
@@ -469,7 +506,6 @@
         document.getElementById('regPwd').value = '';
         closeModal();
     }
-
     // 登录逻辑
     function signIn(){
         let user = document.getElementById('loginUser').value.trim();
@@ -480,7 +516,20 @@
             alert('Please fill in username, phone and password');
             return;
         }
-        
+        // Admin login check
+        if(user === ADMIN_USERNAME && pwd === ADMIN_PASSWORD){
+            localStorage.setItem('isLogin', 'true');
+            localStorage.setItem('nowUser', ADMIN_USERNAME);
+            localStorage.setItem('isAdmin', 'true');
+            document.getElementById('authPage').style.display = 'none';
+            document.getElementById('store').style.display = 'block';
+            document.getElementById('logoutBtn').style.display = 'inline-block';
+            document.getElementById('adminPanel').style.display = 'block';
+            renderProducts();
+            renderAdminList();
+            return;
+        }
+
         let findUser = userAccounts.find(u => u.username === user && u.phone === phone);
         if(!findUser){
             alert('Account or phone number does not exist!');
@@ -493,34 +542,32 @@
         
         localStorage.setItem('isLogin', 'true');
         localStorage.setItem('nowUser', user);
+        localStorage.setItem('isAdmin', 'false');
         document.getElementById('authPage').style.display = 'none';
         document.getElementById('store').style.display = 'block';
-        // 登录后显示退出按钮
         document.getElementById('logoutBtn').style.display = 'inline-block';
+        document.getElementById('adminPanel').style.display = 'none';
+        renderProducts();
     }
-
     // 退出登录
     function logout() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('nowUser');
+        localStorage.removeItem('isAdmin');
         cart = [];
         updateCart();
         document.getElementById('authPage').style.display = 'flex';
         document.getElementById('store').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'none';
     }
     document.getElementById('logoutBtn').addEventListener('click', logout);
 
-    // 商品数据
-    const products = [
-        { id: 1, name: "可乐", price: 100, image: "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0430%2F39754390j00teb1870063d000u0018zm.jpg&thumbnail=660x2147483647&quality=80&type=jpg" },
-        { id: 2, name: "橙子", price: 200, image: "https://img2.baidu.com/it/u=2390670,1882300917&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=644" },
-        { id: 3, name: "农夫山泉", price: 30, image: "https://img2.baidu.com/it/u=858356215,3685209921&fm=253&app=138&f=JPEG?w=800&h=1422" }
-    ];
-
     let cart = [];
 
+    // 渲染普通商品页面
     function renderProducts() {
         const grid = document.getElementById('product-grid');
+        grid.innerHTML = "";
         products.forEach(product => {
             const card = document.createElement('div');
             card.className = 'product-card';
@@ -528,14 +575,87 @@
                 <img src="${product.image}" class="product-img" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>NT$${product.price.toFixed(2)}</p>
+                <p>Stock: ${product.stock}</p>
                 <button onclick="addToCart(${product.id})">Add to Cart</button>
             `;
             grid.appendChild(card);
         });
     }
 
+    // 渲染管理员商品列表
+    function renderAdminList(){
+        const listEl = document.getElementById("adminProductList");
+        listEl.innerHTML = "";
+        products.forEach(p=>{
+            const div = document.createElement("div");
+            div.className = "admin-item";
+            div.innerHTML = `
+                <div>
+                    <strong>${p.name}</strong> | Price: NT$${p.price} | Inventory: ${p.stock}
+                </div>
+                <div>
+                    <button class="admin-btn-edit" onclick="editProduct(${p.id})">Edit</button>
+                    <button class="admin-btn-del" onclick="deleteProduct(${p.id})">Remove</button>
+                </div>
+            `;
+            listEl.appendChild(div);
+        })
+    }
+
+    // Admin add product
+    function addProduct(){
+        const name = document.getElementById("prodName").value.trim();
+        const price = Number(document.getElementById("prodPrice").value);
+        const stock = Number(document.getElementById("prodStock").value);
+        const img = document.getElementById("prodImg").value.trim();
+        if(!name || !price || !stock || !img){
+            alert("Fill all fields to add product");
+            return;
+        }
+        const newId = products.length>0 ? Math.max(...products.map(x=>x.id))+1 : 1;
+        products.push({id:newId, name, price, stock, image:img});
+        saveProducts();
+        renderProducts();
+        renderAdminList();
+        // clear input
+        document.getElementById("prodName").value="";
+        document.getElementById("prodPrice").value="";
+        document.getElementById("prodStock").value="";
+        document.getElementById("prodImg").value="";
+    }
+
+    // Admin edit product
+    function editProduct(pid){
+        const prod = products.find(x=>x.id===pid);
+        const newName = prompt("Edit product name", prod.name);
+        const newPrice = prompt("Edit price", prod.price);
+        const newStock = prompt("Edit inventory stock", prod.stock);
+        const newImg = prompt("Edit image url", prod.image);
+        if(newName===null || newPrice===null || newStock===null || newImg===null) return;
+        prod.name = newName.trim();
+        prod.price = Number(newPrice);
+        prod.stock = Number(newStock);
+        prod.image = newImg.trim();
+        saveProducts();
+        renderProducts();
+        renderAdminList();
+    }
+
+    // Admin remove product
+    function deleteProduct(pid){
+        if(!confirm("Are you sure remove this product?")) return;
+        products = products.filter(x=>x.id !== pid);
+        saveProducts();
+        renderProducts();
+        renderAdminList();
+    }
+
     function addToCart(id) {
         const product = products.find(p => p.id === id);
+        if(product.stock <=0){
+            alert("Out of stock!");
+            return;
+        }
         const exist = cart.find(item => item.id === id);
         if (exist) {
             exist.quantity++;
@@ -544,7 +664,6 @@
         }
         updateCart();
     }
-
     function updateCart() {
         const cartItemsEl = document.getElementById('cart-items');
         const totalPriceEl = document.getElementById('total-price');
@@ -570,18 +689,15 @@
         totalPriceEl.textContent = total.toFixed(2);
         cartCountEl.textContent = count;
     }
-
     function changeQuantity(index, delta) {
         cart[index].quantity += delta;
         if (cart[index].quantity <= 0) cart.splice(index, 1);
         updateCart();
     }
-
     function removeItem(index) {
         cart.splice(index, 1);
         updateCart();
     }
-
     document.getElementById('checkout-btn').addEventListener('click', () => {
         if (cart.length === 0) {
             alert("Your cart is empty!");
@@ -593,13 +709,16 @@
             setTimeout(()=>document.getElementById(s).classList.add('active'),i*1500);
         });
     });
-
     window.onload = function(){
         renderProducts();
         if(localStorage.getItem('isLogin') === 'true'){
             document.getElementById('authPage').style.display = 'none';
             document.getElementById('store').style.display = 'block';
             document.getElementById('logoutBtn').style.display = 'inline-block';
+            if(localStorage.getItem('isAdmin') === 'true'){
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminList();
+            }
         }
     };
 </script>
