@@ -12,7 +12,6 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-
         .auth-wrap {
             height: 100vh;
             background: #2c3e50;
@@ -20,7 +19,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .auth-box {
             background: #fff;
             width: 100%;
@@ -30,12 +28,10 @@
             box-shadow: 0 0 15px #0003;
             position: relative;
         }
-
         .tab-btns {
             display: flex;
             margin-bottom: 25px;
         }
-
         .tab-btn {
             flex: 1;
             border: none;
@@ -44,30 +40,24 @@
             cursor: pointer;
             background: #eee;
         }
-
         .tab-btn.active {
             background: #27ae60;
             color: #fff;
         }
-
         .auth-form {
             display: none;
         }
-
         .auth-form.show {
             display: block;
         }
-
         .input-group {
             margin-bottom: 18px;
         }
-
         .input-group label {
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
         }
-
         .input-group input {
             width: 100%;
             padding: 12px;
@@ -75,7 +65,6 @@
             border-radius: 5px;
             font-size: 15px;
         }
-
         .submit-btn {
             width: 100%;
             padding: 12px;
@@ -86,7 +75,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         /* 验证码行：输入框 + 图片 */
         .captcha-row {
             display: flex;
@@ -101,7 +89,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         /* 注册协议弹窗 */
         .agreement-modal {
             position: fixed;
@@ -115,7 +102,6 @@
             justify-content: center;
             z-index: 9999;
         }
-
         .modal-content {
             background: white;
             width: 90%;
@@ -124,7 +110,6 @@
             border-radius: 10px;
             position: relative;
         }
-
         .modal-close {
             position: absolute;
             top: 15px;
@@ -133,7 +118,6 @@
             cursor: pointer;
             color: #666;
         }
-
         .agreement-text {
             height: 200px;
             overflow-y: auto;
@@ -142,14 +126,12 @@
             margin: 15px 0;
             line-height: 1.6;
         }
-
         .checkbox-group {
             margin: 15px 0;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
         .modal-btn {
             width: 100%;
             padding: 12px;
@@ -159,37 +141,31 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         /* 商店样式 */
         #store {
             display: none;
         }
-
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .header {
             background: #2c3e50;
             color: white;
             padding: 30px 0;
         }
-
         .cart-section {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
         }
-
         .total {
             font-size: 1.2rem;
             font-weight: bold;
             margin: 10px 0;
         }
-
         .checkout-btn {
             background: #27ae60;
             color: white;
@@ -199,35 +175,29 @@
             cursor: pointer;
             font-size: 1rem;
         }
-
         .products h2 {
             margin-bottom: 20px;
         }
-
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
         }
-
         .product-card {
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 15px;
             text-align: center;
         }
-
         .product-img {
             width: 120px;
             height: 120px;
             object-fit: contain;
             margin: 0 auto 10px;
         }
-
         .product-card h3 {
             margin: 10px 0;
         }
-
         .product-card button {
             background: #3498db;
             color: white;
@@ -236,11 +206,9 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .cart-items {
             margin: 10px 0;
         }
-
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -248,18 +216,15 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
-
         .cart-item-info {
             flex: 1;
         }
-
         .cart-item-quantity {
             display: flex;
             align-items: center;
             gap: 8px;
             margin: 0 10px;
         }
-
         .cart-item-quantity button {
             width: 28px;
             height: 28px;
@@ -269,7 +234,6 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
         .cart-item-remove {
             background: #e74c3c;
             color: white;
@@ -278,20 +242,17 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
         .order-status {
             background: #f1f1f1;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
         }
-
         .delivery-tracker {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
         }
-
         .step {
             text-align: center;
             padding: 10px;
@@ -299,15 +260,71 @@
             border-radius: 5px;
             width: 23%;
         }
-
         .step.active {
             background: #27ae60;
             color: white;
         }
+        /* ===== Admin Panel Styles ===== */
+        .admin-panel{
+            background:#fff3cd;
+            border:2px solid #ffc107;
+            padding:24px;
+            border-radius:10px;
+            margin:20px 0;
+            display:none;
+        }
+        .admin-panel h2{
+            color:#856404;
+            margin-bottom:16px;
+        }
+        .admin-row{
+            display:grid;
+            grid-template-columns:1fr 1fr 1fr 1fr;
+            gap:10px;
+            margin-bottom:12px;
+        }
+        .admin-row input{
+            padding:9px;
+            border:1px solid #bbb;
+            border-radius:4px;
+        }
+        .admin-btn-add{
+            background:#27ae60;
+            color:white;
+            border:none;
+            padding:9px 14px;
+            border-radius:4px;
+            cursor:pointer;
+        }
+        .admin-item{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:10px;
+            background:#fff;
+            margin:8px 0;
+            border-radius:6px;
+        }
+        .admin-btn-edit{
+            background:#3498db;
+            color:white;
+            border:none;
+            padding:6px 10px;
+            border-radius:4px;
+            cursor:pointer;
+            margin-right:6px;
+        }
+        .admin-btn-del{
+            background:#e74c3c;
+            color:white;
+            border:none;
+            padding:6px 10px;
+            border-radius:4px;
+            cursor:pointer;
+        }
     </style>
 </head>
 <body>
-
 <!-- 注册协议弹窗 -->
 <div class="agreement-modal" id="agreementModal">
     <div class="modal-content">
@@ -323,7 +340,6 @@
         <button class="modal-btn" onclick="confirmAgreement()">确认同意并注册</button>
     </div>
 </div>
-
 <!-- 登录注册区域 -->
 <div class="auth-wrap" id="authPage">
     <div class="auth-box">
@@ -331,7 +347,6 @@
             <button class="tab-btn active" onclick="switchTab('signin')">Sign In</button>
             <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
         </div>
-
         <div class="auth-form show" id="signinForm">
             <div class="input-group">
                 <label>Username</label>
@@ -345,340 +360,8 @@
                 <label>Password</label>
                 <input type="password" id="loginPwd" placeholder="Enter password">
             </div>
-
             <!-- ✅ 验证码 -->
             <div class="input-group">
                 <label>Verification Code</label>
                 <div class="captcha-row">
                     <input type="text" id="loginCaptcha" placeholder="Enter code" maxlength="4">
-                    <canvas id="captchaCanvas" width="120" height="40" title="Click to refresh"></canvas>
-                </div>
-            </div>
-
-            <button class="submit-btn" onclick="signIn()">Sign In</button>
-        </div>
-
-        <div class="auth-form" id="signupForm">
-            <div class="input-group">
-                <label>Create Username</label>
-                <input type="text" id="regUser" placeholder="Create username">
-            </div>
-            <div class="input-group">
-                <label>Phone Number</label>
-                <input type="tel" id="regPhone" placeholder="Enter your phone number">
-            </div>
-            <div class="input-group">
-                <label>Create Password</label>
-                <input type="password" id="regPwd" placeholder="Create password">
-            </div>
-            <button class="submit-btn" onclick="openAgreementModal()">Sign Up</button>
-        </div>
-    </div>
-</div>
-
-<div id="store">
-    <header class="header">
-        <div class="container" style="display:flex;justify-content:space-between;align-items:center;">
-            <div>
-                <h1><i class="fas fa-store"></i> LTBrown Community Store</h1>
-                <p>Fast Delivery for Our Community</p>
-            </div>
-            <button id="logoutBtn" style="padding:8px 16px;background:#e74c3c;color:#fff;border:none;border-radius:5px;cursor:pointer;display:none;">
-                Log Out
-            </button>
-        </div>
-    </header>
-
-    <section class="cart-section">
-        <div class="container">
-            <h2>Your Cart <span id="cart-count">0</span></h2>
-            <div id="cart-items" class="cart-items"></div>
-            <p class="total">Total: NT$<span id="total-price">0.00</span></p>
-            <button id="checkout-btn" class="checkout-btn">Place Order & Request Delivery</button>
-        </div>
-    </section>
-
-    <main class="products">
-        <div class="container">
-            <h2>Community Products</h2>
-            <div class="product-grid" id="product-grid"></div>
-        </div>
-    </main>
-
-    <section class="order-status" id="order-status" style="display: none;">
-        <div class="container">
-            <h2>Order & Delivery Status</h2>
-            <div class="delivery-tracker">
-                <div class="step" id="step1"><i class="fas fa-check"></i> Order Placed</div>
-                <div class="step" id="step2">Preparing</div>
-                <div class="step" id="step3">Out for Delivery</div>
-                <div class="step" id="step4">Delivered</div>
-            </div>
-        </div>
-    </section>
-</div>
-
-<script>
-    // 动态注册协议配置区，修改这里即可更新协议
-    function getDynamicRegistrationAgreement() {
-        return `
-            <p>欢迎注册LTBrown Store账号！</p>
-            <p>1. 用户应保证注册信息的真实性、有效性。</p>
-            <p>2. 账号仅限本人使用，不得转借、转让他人。</p>
-            <p>3. 平台有权对违规账号进行限制或封禁处理。</p>
-            <p>4. 用户在使用平台服务时需遵守国家法律法规。</p>
-            <p>5. 本协议最终解释权归LTBrown Store所有。</p>
-            <p>6. 平台可随时更新注册协议，不再单独通知用户。</p>
-        `;
-    }
-
-    // 本地账号存储
-    let userAccounts = JSON.parse(localStorage.getItem('userAccounts')) || [
-        {username:"test", phone:"123456789", password:"123456"}
-    ];
-    function saveUsers(){
-        localStorage.setItem('userAccounts', JSON.stringify(userAccounts));
-    }
-
-    // 切换登录注册标签
-    function switchTab(type){
-        document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
-        event.target.classList.add('active');
-        document.querySelectorAll('.auth-form').forEach(form=>form.classList.remove('show'));
-        type === 'signin' 
-            ? document.getElementById('signinForm').classList.add('show')
-            : document.getElementById('signupForm').classList.add('show');
-    }
-
-    // 打开协议弹窗并加载最新协议
-    function openAgreementModal() {
-        document.getElementById("dynamicAgreementContent").innerHTML = getDynamicRegistrationAgreement();
-        let user = document.getElementById('regUser').value.trim();
-        let phone = document.getElementById('regPhone').value.trim();
-        let pwd = document.getElementById('regPwd').value.trim();
-
-        if(!user || !phone || !pwd){
-            alert('Please fill in all fields');
-            return;
-        }
-        let exist = userAccounts.find(u => u.username === user);
-        if(exist){
-            alert('Username already exists! Please use another one');
-            return;
-        }
-        document.getElementById('agreeCheck').checked = false;
-        document.getElementById('agreementModal').style.display = 'flex';
-    }
-
-    // 关闭弹窗
-    function closeModal() {
-        document.getElementById('agreementModal').style.display = 'none';
-    }
-
-    // 确认协议完成注册
-    function confirmAgreement() {
-        if(!document.getElementById('agreeCheck').checked){
-            alert('Please agree the registration agreement first!');
-            return;
-        }
-        let user = document.getElementById('regUser').value.trim();
-        let phone = document.getElementById('regPhone').value.trim();
-        let pwd = document.getElementById('regPwd').value.trim();
-        
-        userAccounts.push({username:user, phone:phone, password:pwd});
-        saveUsers();
-        alert('Sign Up Success! Please Sign In');
-        switchTab('signin');
-        document.getElementById('regUser').value = '';
-        document.getElementById('regPhone').value = '';
-        document.getElementById('regPwd').value = '';
-        closeModal();
-    }
-
-    // ========== 验证码部分 ==========
-    let captchaCode = '';
-
-    function randomColor(){
-        const r = Math.floor(Math.random()*256);
-        const g = Math.floor(Math.random()*256);
-        const b = Math.floor(Math.random()*256);
-        return `rgb(${r},${g},${b})`;
-    }
-
-    function drawCaptcha(){
-        const canvas = document.getElementById('captchaCanvas');
-        const ctx = canvas.getContext('2d');
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        captchaCode = '';
-        ctx.fillStyle = '#f0f0f0';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-
-        // 4字符
-        for(let i=0;i<4;i++){
-            const c = chars[Math.floor(Math.random()*chars.length)];
-            captchaCode += c;
-            ctx.font = 'bold 24px Arial';
-            ctx.fillStyle = randomColor();
-            ctx.save();
-            ctx.translate(25+i*25,25);
-            ctx.rotate((Math.random()-0.5)*0.4);
-            ctx.fillText(c,0,0);
-            ctx.restore();
-        }
-        // 干扰线
-        for(let i=0;i<4;i++){
-            ctx.strokeStyle = randomColor();
-            ctx.beginPath();
-            ctx.moveTo(Math.random()*canvas.width,Math.random()*canvas.height);
-            ctx.lineTo(Math.random()*canvas.width,Math.random()*canvas.height);
-            ctx.stroke();
-        }
-    }
-
-    // 点击刷新
-    document.addEventListener('DOMContentLoaded', function(){
-        drawCaptcha();
-        document.getElementById('captchaCanvas').addEventListener('click',drawCaptcha);
-    });
-
-    // 登录逻辑（+验证码）
-    function signIn(){
-        let user = document.getElementById('loginUser').value.trim();
-        let phone = document.getElementById('loginPhone').value.trim();
-        let pwd = document.getElementById('loginPwd').value.trim();
-        let cap = document.getElementById('loginCaptcha').value.trim().toUpperCase();
-
-        if(!user || !phone || !pwd || !cap){
-            alert('Please fill in username, phone, password and captcha');
-            return;
-        }
-        if(cap !== captchaCode){
-            alert('Incorrect verification code');
-            drawCaptcha();
-            document.getElementById('loginCaptcha').value='';
-            return;
-        }
-        
-        let findUser = userAccounts.find(u => u.username === user && u.phone === phone);
-        if(!findUser){
-            alert('Account or phone number does not exist!');
-            return;
-        }
-        if(findUser.password !== pwd){
-            alert('Wrong password! Please try again');
-            return;
-        }
-        
-        localStorage.setItem('isLogin', 'true');
-        localStorage.setItem('nowUser', user);
-        document.getElementById('authPage').style.display = 'none';
-        document.getElementById('store').style.display = 'block';
-        document.getElementById('logoutBtn').style.display = 'inline-block';
-    }
-
-    // 退出登录
-    function logout() {
-        localStorage.removeItem('isLogin');
-        localStorage.removeItem('nowUser');
-        cart = [];
-        updateCart();
-        document.getElementById('authPage').style.display = 'flex';
-        document.getElementById('store').style.display = 'none';
-    }
-    document.getElementById('logoutBtn').addEventListener('click', logout);
-
-    // 商品数据
-    const products = [
-        { id: 1, name: "可乐", price: 100, image: "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0430%2F39754390j00teb1870063d000u0018zm.jpg&thumbnail=660x2147483647&quality=80&type=jpg" },
-        { id: 2, name: "橙子", price: 200, image: "https://img2.baidu.com/it/u=2390670,1882300917&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=644" },
-        { id: 3, name: "农夫山泉", price: 30, image: "https://img2.baidu.com/it/u=858356215,3685209921&fm=253&app=138&f=JPEG?w=800&h=1422" }
-    ];
-
-    let cart = [];
-
-    function renderProducts() {
-        const grid = document.getElementById('product-grid');
-        products.forEach(product => {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.innerHTML = `
-                <img src="${product.image}" class="product-img" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p>NT$${product.price.toFixed(2)}</p>
-                <button onclick="addToCart(${product.id})">Add to Cart</button>
-            `;
-            grid.appendChild(card);
-        });
-    }
-
-    function addToCart(id) {
-        const product = products.find(p => p.id === id);
-        const exist = cart.find(item => item.id === id);
-        if (exist) {
-            exist.quantity++;
-        } else {
-            cart.push({ ...product, quantity: 1 });
-        }
-        updateCart();
-    }
-
-    function updateCart() {
-        const cartItemsEl = document.getElementById('cart-items');
-        const totalPriceEl = document.getElementById('total-price');
-        const cartCountEl = document.getElementById('cart-count');
-        cartItemsEl.innerHTML = '';
-        let total = 0, count = 0;
-        cart.forEach((item, index) => {
-            total += item.price * item.quantity;
-            count += item.quantity;
-            const div = document.createElement('div');
-            div.className = 'cart-item';
-            div.innerHTML = `
-                <div class="cart-item-info">${item.name} NT$${item.price.toFixed(2)}</div>
-                <div class="cart-item-quantity">
-                    <button onclick="changeQuantity(${index}, -1)">-</button>
-                    <span>${item.quantity}</span>
-                    <button onclick="changeQuantity(${index}, 1)">+</button>
-                </div>
-                <button class="cart-item-remove" onclick="removeItem(${index})">Delete</button>
-            `;
-            cartItemsEl.appendChild(div);
-        });
-        totalPriceEl.textContent = total.toFixed(2);
-        cartCountEl.textContent = count;
-    }
-
-    function changeQuantity(index, delta) {
-        cart[index].quantity += delta;
-        if (cart[index].quantity <= 0) cart.splice(index, 1);
-        updateCart();
-    }
-
-    function removeItem(index) {
-        cart.splice(index, 1);
-        updateCart();
-    }
-
-    document.getElementById('checkout-btn').addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert("Your cart is empty!");
-            return;
-        }
-        document.getElementById('order-status').style.display = 'block';
-        const steps = ['step1','step2','step3','step4'];
-        steps.forEach((s,i)=>{
-            setTimeout(()=>document.getElementById(s).classList.add('active'),i*1500);
-        });
-    });
-
-    window.onload = function(){
-        renderProducts();
-        if(localStorage.getItem('isLogin') === 'true'){
-            document.getElementById('authPage').style.display = 'none';
-            document.getElementById('store').style.display = 'block';
-            document.getElementById('logoutBtn').style.display = 'inline-block';
-        }
-    };
-</script>
-</body>
-</html>
